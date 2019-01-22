@@ -3,14 +3,7 @@ build: false
 environment:
     PYTHON: "C:\\Python37"
 
-    CONAN_REFERENCE: "abseil/vers"
-    CONAN_USERNAME: "user"
-    CONAN_LOGIN_USERNAME: "user"
-    CONAN_CHANNEL: "channel"
-    
     matrix:
-        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-          CONAN_VISUAL_VERSIONS: 12
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
