@@ -1,6 +1,15 @@
+#include <cstdlib>
 #include <iostream>
-#include "hello.h"
+#include <string>
+#include <vector>
+
+#include "absl/strings/str_join.h"
 
 int main() {
-    hello();
+  std::vector<std::string> v = {"foo","bar","baz"};
+  std::string s = absl::StrJoin(v, "-");
+  absl::StrAppend(&s, 5);
+  std::cout << "Joined string: " << s << "\n";
+
+  return EXIT_SUCCESS;
 }
