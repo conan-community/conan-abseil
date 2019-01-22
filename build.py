@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import tempfile
 import datetime
+import shutil
 import os
 from conans import tools
 from cpt.packager import ConanMultiPackager
@@ -37,12 +38,11 @@ class CPTHelper(object):
 if __name__ == "__main__":
     cpt_helper = CPTHelper()
     target_dir = cpt_helper.download_abseil()
-    test_folder = os.path.join(os.getcwd(), "test_package")
+    shutil.copytree("test_package", os.path.join(target_dir, "test_package"))
     with tools.chdir(target_dir):
         builder = ConanMultiPackager(
             reference=cpt_helper.reference,
             username=cpt_helper.username,
-            channel=cpt_helper.channel,
-            test_folder=test_folder)
+            channel=cpt_helper.channel)
         builder.add_common_builds(pure_c=False)
         builder.run()
