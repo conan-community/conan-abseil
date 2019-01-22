@@ -3,7 +3,6 @@
 import tempfile
 import datetime
 import os
-import shutil
 from conans import tools
 from cpt.packager import ConanMultiPackager
 
@@ -28,22 +27,22 @@ class CPTHelper(object):
         return "abseil/{}@{}".format(self.version, namespace)
 
     def download_abseil(self):
-        print("Downloading abseil project ...")
         temp_dir = tempfile.mkdtemp()
         target_dir = os.path.join(temp_dir, "abseil-cpp-master")
+        print("Downloading abseil project to %s" % target_dir)
         tools.get("https://github.com/abseil/abseil-cpp/archive/master.zip", destination=temp_dir)
-        files = os.listdir(target_dir)
-        for index in files:
-            if "README" in index: continue
-            shutil.move(os.path.join(target_dir, index), os.getcwd())
+        return target_dir
 
 
 if __name__ == "__main__":
     cpt_helper = CPTHelper()
-    cpt_helper.download_abseil()
-    builder = ConanMultiPackager(
-        reference=cpt_helper.reference,
-        username=cpt_helper.username,
-        channel=cpt_helper.channel)
-    builder.add_common_builds(pure_c=False)
-    builder.run()
+    target_dir = cpt_helper.download_abseil()
+    test_folder = os.path.join(os.getcwd(), "test_package")
+    with tools.chdir(target_dir):
+        builder = ConanMultiPackager(
+            reference=cpt_helper.reference,
+            username=cpt_helper.username,
+            channel=cpt_helper.channel,
+            test_folder=test_folder)
+        builder.add_common_builds(pure_c=False)
+        builder.run()
