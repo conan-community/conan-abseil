@@ -34,6 +34,7 @@ class CPTHelper(object):
         tools.get("https://github.com/abseil/abseil-cpp/archive/master.zip", destination=temp_dir)
         files = os.listdir(target_dir)
         for index in files:
+            if "README" in index: continue
             shutil.move(os.path.join(target_dir, index), os.getcwd())
 
 
