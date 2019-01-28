@@ -28,10 +28,11 @@ class CPTHelper(object):
         return "abseil/{}@{}".format(self.version, namespace)
 
     def download_abseil(self):
+        commit_id = "89ea0c5ff34aaa5855cfc7aa41f323b8a0ef0ede"
         temp_dir = tempfile.mkdtemp()
-        target_dir = os.path.join(temp_dir, "abseil-cpp-master")
+        target_dir = os.path.join(temp_dir, "abseil-cpp-{}".format(commit_id))
         print("Downloading abseil project to %s" % target_dir)
-        tools.get("https://github.com/abseil/abseil-cpp/archive/master.zip", destination=temp_dir)
+        tools.get("https://github.com/abseil/abseil-cpp/archive/{}.zip".format(commit_id), destination=temp_dir)
         return target_dir
 
 
