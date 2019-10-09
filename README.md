@@ -10,7 +10,7 @@ The packages generated with this *conanfile.py* can be found in [Bintray](https:
 
 ## Builder Package
 
-Abseil has Conan supported, however its CI infrastructure is in [review] (https://github.com/abseil/abseil-cpp/pull/197).
+Abseil has Conan supported, however its CI infrastructure is in [review](https://github.com/abseil/abseil-cpp/pull/197).
 Meanwhile, Conan Community will provide a minimal infrastructure only to build Conan packages.
 This project shall be **DEPRECATED** in the future, when Abseil will provide its own official package.
 
